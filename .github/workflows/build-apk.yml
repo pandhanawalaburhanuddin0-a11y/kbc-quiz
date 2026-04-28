@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ANDROID_SDK_ROOT: ${{ runner.home }}/android-sdk
+      ANDROID_HOME: ${{ runner.home }}/android-sdk
+      PATH: ${{ runner.home }}/android-sdk/cmdline-tools/latest/bin:${{ runner.home }}/android-sdk/platform-tools:${{ env.PATH }}
 
     steps:
     - uses: actions/checkout@v4
@@ -27,8 +31,14 @@ jobs:
         unzip -q commandlinetools.zip
         rm commandlinetools.zip
         mv cmdline-tools latest
-        yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=$HOME/android-sdk --licenses
-        yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-31" "build-tools;31.0.0" "cmdline-tools;latest"
+        yes | sdkmanager --sdk_root=$HOME/android-sdk --licenses
+        sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-31" "platforms;android-37" "build-tools;31.0.0" "build-tools;37.0.0" "cmdline-tools;latest"
+
+    - name: Verify Android SDK installation
+      run: |
+        ls -la $HOME/android-sdk/build-tools
+        ls -la $HOME/android-sdk/platforms
+        ls -la $HOME/android-sdk/cmdline-tools/latest/bin
 
     - name: Install buildozer
       run: |
@@ -41,7 +51,7 @@ jobs:
 
     - name: Build APK
       run: |
-        ANDROID_SDK_ROOT=$HOME/android-sdk ANDROID_HOME=$HOME/android-sdk PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$HOME/android-sdk/platform-tools:$PATH python -m buildozer android debug
+        python -m buildozer android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4

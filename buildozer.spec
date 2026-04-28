@@ -56,10 +56,11 @@ orientation = portrait
 # Android build settings
 android.api = 31
 android.minapi = 21
-android.sdk = 31
 android.ndk = 25b
 android.ndk_api = 21
 android.build_tools_version = 31.0.0
+android.sdk_path = /home/runner/android-sdk
+android.accept_sdk_license = True
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
