@@ -1,9 +1,5 @@
 [app]
-android.api = 31
-android.minapi = 21
-android.sdk = 31
-android.ndk = 25b
-android.build_tools_version = 31.0.0
+
 # (str) Title of your application
 title = KBC Quiz
 
@@ -56,6 +52,14 @@ requirements = python3,kivy
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
 orientation = portrait
+
+# Android build settings
+android.api = 31
+android.minapi = 21
+android.sdk = 31
+android.ndk = 25b
+android.ndk_api = 21
+android.build_tools_version = 31.0.0
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
