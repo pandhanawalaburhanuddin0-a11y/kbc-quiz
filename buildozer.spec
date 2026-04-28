@@ -1,5 +1,9 @@
 [app]
-
+android.api = 31
+android.minapi = 21
+android.sdk = 31
+android.ndk = 25b
+android.build_tools_version = 31.0.0
 # (str) Title of your application
 title = KBC Quiz
 
